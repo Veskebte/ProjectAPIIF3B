@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MahasiswaController extends Controller
 {
@@ -12,7 +13,10 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $prodis = Mahasiswa::with('prodis')->get();
+        $data['message'] = true;
+        $data['result'] = $prodis;
+        return response()->json($data, Response::HTTP_OK);
     }
 
     /**
