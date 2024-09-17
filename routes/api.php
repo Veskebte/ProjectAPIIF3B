@@ -14,6 +14,14 @@ route::get('/fakultas', [FakultasController::class, 'index']);
 route::get('/prodi', action: [ProdiController::class, 'index']);
 route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
-Route::post('/fakultas', action: [FakultasController::class, 'store']);
+route::post('/fakultas', action: [FakultasController::class, 'store']);
 route::post('/prodi', action: [ProdiController::class, 'store']);
 route::post('/mahasiswa', action: [MahasiswaController::class, 'store']);
+
+route::patch('/fakultas/{fakultas}', [FakultasController::class, 'update']);
+route::patch('/prodi/{prodi}', [ProdiController::class, 'update']);
+route::patch('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update']);
+
+route::delete('/fakultas/{fakultas}', [FakultasController::class, 'destroy']);
+route::delete('/prodi/{prodi}', [ProdiController::class, 'destroy']);
+route::delete('/mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy']);

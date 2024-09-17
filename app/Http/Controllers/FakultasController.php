@@ -62,16 +62,36 @@ class FakultasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fakultas $fakultas)
+    public function update(Request $request, $id)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required'
+        ]);
+
+        $result = Fakultas::where('id', operator: $id)->update($validate);
+        if($result){
+            $data['success'] = true;
+            $data['message'] = "Data Fakultas Berhasil di-Update.";
+            $data['result'] = $result;
+            return response()->json($data, Response::HTTP_OK);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fakultas $fakultas)
+    public function destroy($id)
     {
-        //
+        $fakultas = Fakultas::find($id);
+        if($fakultas){
+            $fakultas->delete(); // hapus data fakultas berdasarkan $id
+            $data['success'] = true;
+            $data['message'] = "Data Fakultas Berhasil Dihapus.";
+            return response()->json($data, Response::HTTP_OK);
+        } else{
+            $data['success'] = false;
+            $data['message'] = "Data Fakultas Tidak DItemukan.";
+            return response()->json($data, Response::HTTP_NOT_FOUND);
+        }
     }
 }
